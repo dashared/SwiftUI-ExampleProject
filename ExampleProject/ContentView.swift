@@ -9,16 +9,21 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var textInput = ""
+    @State var textInputDict: [String: String] = [:]
+    
+    var dictKey: String = "hello"
     
     var body: some View {
-        NavigationView {
+        let textInput = textInputDict[dictKey] ?? ""
+        
+        return NavigationView {
             VStack {
                 Image(systemName: "globe")
                     .imageScale(.large)
                     .foregroundColor(.accentColor)
-                Text("Your input from previous view: \(textInput)")
-                NavigationLink("Tap me", destination: { SomeTextInputView(textInput: $textInput) })
+                Text("Dictionary key: \(dictKey)")
+                Text("Your input from previous view: \(textInputDict[dictKey] ?? "")")
+                NavigationLink("Tap me", destination: { SomeTextInputView(textInputDict: $textInputDict, date: dictKey, textInput: textInput) })
             }
         }
         .padding()
